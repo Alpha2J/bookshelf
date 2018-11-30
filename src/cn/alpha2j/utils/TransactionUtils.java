@@ -24,13 +24,13 @@ public class TransactionUtils {
     public static boolean isBookLeft(String isbn) {
         Book record = BookUtils.queryByIsbn(isbn);
 
-        if(record == null) {
+        if (record == null) {
             return false;
         }
 
         int leftNum = Integer.valueOf(record.getTotalNum());
 
-        if(leftNum > 0) {
+        if (leftNum > 0) {
             return true;
         } else {
             return false;
@@ -39,18 +39,18 @@ public class TransactionUtils {
 
     //借书, 一次只能借一本
     public static boolean borrowBook(Customer customer, Book book) {
-        if(customer == null || book == null) {
+        if (customer == null || book == null) {
             throw new NullPointerException();
         }
 
         String isbn = book.getIsbn();
 
-        if(!isBookLeft(isbn)) {
+        if (!isBookLeft(isbn)) {
             return false;  //书籍数目不够
         }
 
         long borrowTime = new Date().getTime();
-        long temp = 3600*24*30*1000L;            //一个月时间
+        long temp = 3600 * 24 * 30 * 1000L;            //一个月时间
         long returnTime = borrowTime + temp;
 
         TransactionRecord record = new TransactionRecord(customer.getId(), customer.getUsername(), book.getIsbn(), book.getBookName(), String.valueOf(borrowTime), String.valueOf(returnTime));
@@ -95,7 +95,7 @@ public class TransactionUtils {
             appendStream = new FileOutputStream(TransactionUtils.RECORD_FILE, true);//执行第一次后记录要加在后面
             appendDataOutputStream = new DataOutputStream(appendStream);
 
-            if(recordList.size() == 1) {
+            if (recordList.size() == 1) {
                 if (recordList.get(0).getCustomerId().equals(customerId) && recordList.get(0).getIsbn().equals(isbn)) {
                     refreshStream.flush();//清空文件
                     isSuccess = true;
@@ -121,7 +121,7 @@ public class TransactionUtils {
                 }
             }
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             release(refreshDataOutputStream, refreshStream);
@@ -149,7 +149,7 @@ public class TransactionUtils {
 
         try {
             recordFile = FileUtils.getRandomAccessFile(fileName, "r");  //只读
-            while(recordFile.getFilePointer() != recordFile.length()) {
+            while (recordFile.getFilePointer() != recordFile.length()) {
                 String record = FileUtils.readSpecificRecord(TransactionUtils.RECORD_SIZE, recordFile).trim();
                 String[] splitRecord = record.split(TransactionUtils.SEPARATOR);
 
@@ -188,7 +188,7 @@ public class TransactionUtils {
 
     //关闭各种流
     private static void release(DataOutputStream dataOutputStream, OutputStream outputStream) {
-        if(dataOutputStream != null) {
+        if (dataOutputStream != null) {
             try {
                 dataOutputStream.close();
             } catch (IOException e) {
@@ -196,7 +196,7 @@ public class TransactionUtils {
             }
         }
 
-        if(outputStream != null) {
+        if (outputStream != null) {
             try {
                 outputStream.close();
             } catch (IOException e) {

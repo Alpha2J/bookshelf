@@ -23,7 +23,7 @@ public class Client {
         BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));//读取控制台数据
 
         String line;
-        while((line = consoleReader.readLine()) != null) {
+        while ((line = consoleReader.readLine()) != null) {
             printStream.println(line);
         }
 
@@ -47,7 +47,7 @@ public class Client {
         try {
             printStream = new PrintStream(socket.getOutputStream());
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -71,10 +71,10 @@ class ReaderThread implements Runnable {
     public void run() {
         try {
             String line;
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -10,7 +10,7 @@ public class FileUtils {
     /**
      * 获取带指针的文件对象
      *
-     * @param name  文件名字, 包括路径
+     * @param name 文件名字, 包括路径
      * @param mode
      * @return
      * @throws FileNotFoundException
@@ -26,7 +26,7 @@ public class FileUtils {
      * @param randomAccessFile
      */
     public static void releaseRandomAccessFile(RandomAccessFile randomAccessFile) {
-        if(randomAccessFile != null) {
+        if (randomAccessFile != null) {
             try {
                 randomAccessFile.close();
             } catch (IOException e) {
@@ -47,7 +47,7 @@ public class FileUtils {
     public static boolean writeFixedString(String record, int recordSize, DataOutput output) {
         boolean isSuccess = false;
 
-        if(record == null) {
+        if (record == null) {
             throw new NullPointerException();
         }
 
@@ -64,7 +64,7 @@ public class FileUtils {
         byte tempByte;
         for (int i = 0; i < recordSize; i++) {
             tempByte = 32;           //不够length长度的话用空字符填充, 32代表的是空字符
-            if(i < bytes.length) {
+            if (i < bytes.length) {
                 tempByte = bytes[i];
             }
             tempBytes[i] = tempByte;
@@ -85,7 +85,7 @@ public class FileUtils {
     /**
      * 从文件读一条固定字节大小的记录
      *
-     * @param recordSize          写入文件记录大小, 字节为单位
+     * @param recordSize       写入文件记录大小, 字节为单位
      * @param randomAccessFile
      * @return
      */
