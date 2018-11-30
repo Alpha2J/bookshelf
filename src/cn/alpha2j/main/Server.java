@@ -3,14 +3,11 @@ package cn.alpha2j.main;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
 
 /**
  * Created by cn.alpha2j on 2016/11/22.
  */
 public class Server {
-
-    private List<Socket> socketList; //已经连接上的socket
 
     public static void main(String[] args) {
         ServerSocket serverSocket;
@@ -18,7 +15,7 @@ public class Server {
         try {
             serverSocket = new ServerSocket(23333);
 
-            while(true) {
+            while (true) {
                 Socket socket = serverSocket.accept();
                 new Thread(new MyTask(socket)).start();
             }

@@ -2,7 +2,6 @@ package cn.alpha2j.bean;
 
 /**
  * Created by cn.alpha2j on 2016/11/30.
- *
  */
 public class ResultRecord implements Comparable<ResultRecord> {
 
@@ -53,20 +52,21 @@ public class ResultRecord implements Comparable<ResultRecord> {
 
     /**
      * 只要isbn 和 bookName 相同就认为这是相同的记录
+     *
      * @param o
      * @return
      */
     @Override
     public boolean equals(Object o) {
-        if(this == o) {
+        if (this == o) {
             return true;
         }
 
-        if(!(o instanceof ResultRecord)) {
+        if (!(o instanceof ResultRecord)) {
             return false;
         }
 
-        ResultRecord rr = (ResultRecord)o;
+        ResultRecord rr = (ResultRecord) o;
 
         return rr.isbn.equals(isbn)
                 && rr.bookName.equals(bookName);
@@ -79,9 +79,9 @@ public class ResultRecord implements Comparable<ResultRecord> {
 
     @Override
     public int compareTo(ResultRecord o) {
-        if(historyBorrowNum < o.historyBorrowNum) {
+        if (historyBorrowNum < o.historyBorrowNum) {
             return -1;
-        } else if(historyBorrowNum == o.historyBorrowNum) {
+        } else if (historyBorrowNum == o.historyBorrowNum) {
             return 0;
         } else {
             return 1;

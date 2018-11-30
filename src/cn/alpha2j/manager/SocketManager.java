@@ -9,7 +9,7 @@ import java.net.Socket;
 public class SocketManager {
 
     public static void close(Socket socket) {
-        if(socket != null) {
+        if (socket != null) {
             try {
                 socket.close();
             } catch (IOException e) {

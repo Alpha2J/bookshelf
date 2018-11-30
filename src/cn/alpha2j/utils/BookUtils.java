@@ -30,7 +30,7 @@ public class BookUtils {
         }
 
         //要是抛出异常就返回false
-        if(randomAccessFile == null) {
+        if (randomAccessFile == null) {
             return isSuccess;
         }
 
@@ -57,13 +57,13 @@ public class BookUtils {
         }
 
         //假如上面抛出了异常的话那么下面这些还是会运行, 但是randomAccessFile 为null, 就全乱了
-        if(randomAccessFile == null) {
+        if (randomAccessFile == null) {
             return false;
         }
 
         Book record = queryByIsbn(isbn, randomAccessFile);
 
-        if(record == null) {
+        if (record == null) {
             FileUtils.releaseRandomAccessFile(randomAccessFile);
             return false;
         }
@@ -93,7 +93,7 @@ public class BookUtils {
      */
     public static boolean deleteBook(String isbn) {
         //不存在该书籍
-        if(queryByIsbn(isbn) == null) {
+        if (queryByIsbn(isbn) == null) {
             return false;
         }
 
@@ -112,11 +112,11 @@ public class BookUtils {
 
             boolean isFirst = true;
             for (int i = 0; i < recordList.size(); i++) {
-                if(recordList.get(i).getIsbn().equals(isbn)) {
+                if (recordList.get(i).getIsbn().equals(isbn)) {
                     //recordList.remove(i);  不要remove, 不然后面的i就乱了
                     continue;
                 }
-                if(isFirst) {
+                if (isFirst) {
                     //第一次要清空文件再写
                     FileUtils.writeFixedString(formatBook(recordList.get(i)), BookUtils.RECORD_SIZE, refreshDataOutputStream);
 
@@ -127,7 +127,7 @@ public class BookUtils {
                     FileUtils.writeFixedString(formatBook(recordList.get(i)), BookUtils.RECORD_SIZE, appendDataOutputStream);
                 }
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             release(refreshDataOutputStream, refreshStream);//再写一遍, 假如上面 isFirst 没有执行的话那么就没有关掉
@@ -147,12 +147,12 @@ public class BookUtils {
 
             String record;
             String[] splitRecord;
-            while(randomAccessFile.getFilePointer() != randomAccessFile.length()) {
+            while (randomAccessFile.getFilePointer() != randomAccessFile.length()) {
                 record = FileUtils.readSpecificRecord(BookUtils.RECORD_SIZE, randomAccessFile).trim();
                 splitRecord = record.split(BookUtils.SEPARATOR);
-                bookList.add(new Book(splitRecord[0], splitRecord[1],splitRecord[2], splitRecord[3],splitRecord[4]));
+                bookList.add(new Book(splitRecord[0], splitRecord[1], splitRecord[2], splitRecord[3], splitRecord[4]));
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             FileUtils.releaseRandomAccessFile(randomAccessFile);
@@ -169,10 +169,10 @@ public class BookUtils {
             recordFile.seek(0);//从文件开头开始扫描
             String record;  //存返回的数据
             String[] splitRecord;   //split后的record
-            while(recordFile.getFilePointer() != recordFile.length()){
+            while (recordFile.getFilePointer() != recordFile.length()) {
                 record = FileUtils.readSpecificRecord(BookUtils.RECORD_SIZE, recordFile).trim();//要去掉后面空格
                 splitRecord = record.split(BookUtils.SEPARATOR);
-                if(splitRecord[BookField.ISBN.toValue()].equals(isbn)) {
+                if (splitRecord[BookField.ISBN.toValue()].equals(isbn)) {
                     book = new Book(splitRecord[0], splitRecord[1], splitRecord[2], splitRecord[3], splitRecord[4]);
                     break; //一本书只有一个isbn, 找到后就不往下扫描了
                 }
@@ -192,7 +192,7 @@ public class BookUtils {
         try {
             randomAccessFile = FileUtils.getRandomAccessFile(BookUtils.RECORD_FILE, "r");
             book = queryByIsbn(isbn, randomAccessFile);
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             FileUtils.releaseRandomAccessFile(randomAccessFile);
@@ -220,7 +220,7 @@ public class BookUtils {
 
         try {
             bookList = queryForList(author, BookField.AUTHOR.toValue());
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -233,7 +233,7 @@ public class BookUtils {
 
         try {
             bookList = queryForList(press, BookField.PRESS.toValue());
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -248,11 +248,11 @@ public class BookUtils {
         String record;
         String[] splitRecord;
 
-        while(randomAccessFile.getFilePointer() != randomAccessFile.length()) {
+        while (randomAccessFile.getFilePointer() != randomAccessFile.length()) {
             record = FileUtils.readSpecificRecord(BookUtils.RECORD_SIZE, randomAccessFile).trim();
             splitRecord = record.split(BookUtils.SEPARATOR);
 
-            if(splitRecord[field].equals(param)) {
+            if (splitRecord[field].equals(param)) {
                 bookList.add(new Book(splitRecord[0], splitRecord[1], splitRecord[2], splitRecord[3], splitRecord[4]));
             }
         }
@@ -286,7 +286,7 @@ public class BookUtils {
 
     //关闭各种流
     private static void release(DataOutputStream dataOutputStream, OutputStream outputStream) {
-        if(dataOutputStream != null) {
+        if (dataOutputStream != null) {
             try {
                 dataOutputStream.close();
             } catch (IOException e) {
@@ -294,7 +294,7 @@ public class BookUtils {
             }
         }
 
-        if(outputStream != null) {
+        if (outputStream != null) {
             try {
                 outputStream.close();
             } catch (IOException e) {

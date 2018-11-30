@@ -16,7 +16,7 @@ public class CustomerManager {
 
     public static void customerManagerIndex(BufferedReader bufferedReader, PrintStream printStream) throws IOException {
         boolean isQuit = false;
-        while(!isQuit) {
+        while (!isQuit) {
             printStream.println("----------用户管理页面----------");
             printStream.println("1 显示所有用户");
             printStream.println("2 添加用户");
@@ -25,17 +25,17 @@ public class CustomerManager {
 
             String action = bufferedReader.readLine();
 
-            switch(action) {
-                case "1" :
+            switch (action) {
+                case "1":
                     showAllCustomers(printStream);
                     break;
-                case "2" :
+                case "2":
                     addCustomers(bufferedReader, printStream);
                     break;
-                case "3" :
+                case "3":
                     deleteCustomers(bufferedReader, printStream);
                     break;
-                default :
+                default:
                     isQuit = true;
                     break;
             }
@@ -47,7 +47,7 @@ public class CustomerManager {
         printStream.println("----------显示所有用户----------");
         List<Customer> allCustomer = CustomerUtils.getAllCustomer();
 
-        for(Customer customer : allCustomer) {
+        for (Customer customer : allCustomer) {
             printStream.println("id: " + customer.getId() + "  用户名:" + customer.getUsername());
         }
     }
@@ -55,7 +55,7 @@ public class CustomerManager {
     //添加用户
     private static void addCustomers(BufferedReader bufferedReader, PrintStream printStream) throws IOException {
         boolean isQuit = false;
-        while(!isQuit) {
+        while (!isQuit) {
             printStream.println("----------添加用户----------");
 
             printStream.println("用户名(英文,数字,或下划线 长度: 4-20个字符):");
@@ -65,12 +65,12 @@ public class CustomerManager {
 
             String action;
 
-            if(!Pattern.matches("\\w{4,20}", username) || !Pattern.matches("[\\w!@#$]{4,30}", password)) {
+            if (!Pattern.matches("\\w{4,20}", username) || !Pattern.matches("[\\w!@#$]{4,30}", password)) {
                 printStream.println("用户名或者密码不合法, <quit>退出, 任意字符继续");
 
                 action = bufferedReader.readLine().trim();
 
-                if(action.equals("<quit>")) {
+                if (action.equals("<quit>")) {
                     isQuit = true;
                     continue;
                 } else {
@@ -80,7 +80,7 @@ public class CustomerManager {
 
             Boolean isSuccess = CustomerUtils.addCustomer(username, password);
 
-            if(isSuccess) {
+            if (isSuccess) {
                 printStream.println("添加成功, <quit>退出, 任意键继续");
             } else {
                 printStream.println("用户名已经存在, 添加失败, <quit>退出, 任意键继续");
@@ -88,7 +88,7 @@ public class CustomerManager {
 
             action = bufferedReader.readLine().trim();
 
-            if(action.equals("<quit>")) {
+            if (action.equals("<quit>")) {
                 isQuit = true;
             }
         }
@@ -97,7 +97,7 @@ public class CustomerManager {
     //删除用户
     private static void deleteCustomers(BufferedReader bufferedReader, PrintStream printStream) throws IOException {
         boolean isQuit = false;
-        while(!isQuit) {
+        while (!isQuit) {
             printStream.println("----------删除用户----------");
 
             printStream.println("请输入需要删除的用户名:");
@@ -105,7 +105,7 @@ public class CustomerManager {
 
             boolean isSuccess = CustomerUtils.deleteCustomer(username);
 
-            if(isSuccess) {
+            if (isSuccess) {
                 printStream.println("删除成功, 任意键继续, <quit>退出");
             } else {
                 printStream.println("删除失败, 任意键继续, <quit>退出");
@@ -113,7 +113,7 @@ public class CustomerManager {
 
             String action = bufferedReader.readLine().trim();
 
-            if(action.equals("<quit>")) {
+            if (action.equals("<quit>")) {
                 isQuit = true;
             }
         }

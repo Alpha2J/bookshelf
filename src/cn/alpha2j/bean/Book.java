@@ -63,5 +63,4 @@ public class Book {
     public void setTotalNum(String totalNum) {
         this.totalNum = totalNum;
     }
-
 }

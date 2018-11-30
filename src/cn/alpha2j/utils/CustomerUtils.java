@@ -12,9 +12,9 @@ import java.util.List;
  * 2. 用户注册
  * 3. 删除用户
  * 4. 更新用户信息
- *
+ * <p>
  * 另: 解析用户文件也定义在这好了
- *
+ * <p>
  * 注: 等完成后还要对用户名和密码长度等其他写入文件的字段合法性进行判断
  */
 public class CustomerUtils {
@@ -39,7 +39,7 @@ public class CustomerUtils {
             e.printStackTrace();
         }
 
-        if(recordFile == null) {
+        if (recordFile == null) {
             return null;
         }
 
@@ -48,10 +48,10 @@ public class CustomerUtils {
         Customer customer = null;
 
         try {
-            while(recordFile.getFilePointer() != recordFile.length()) {
+            while (recordFile.getFilePointer() != recordFile.length()) {
                 record = FileUtils.readSpecificRecord(CustomerUtils.RECORD_SIZE, recordFile).trim();//如果separator为'---'
                 splitRecord = record.split(CustomerUtils.SEPARATOR);                           //则标准格式 1---admin---admin---true---[1,2,3]
-                if(splitRecord[1].equals(username) && splitRecord[2].equals(password)) {
+                if (splitRecord[1].equals(username) && splitRecord[2].equals(password)) {
                     customer = new Customer(splitRecord[0], splitRecord[1], splitRecord[2], Boolean.valueOf(splitRecord[3]));
                     break;
                 }
@@ -70,7 +70,7 @@ public class CustomerUtils {
         boolean isSuccess = false;
 
         //用户名不允许重复
-        if(isCustomerExist(username)) {
+        if (isCustomerExist(username)) {
             return false;
         }
 
@@ -82,7 +82,7 @@ public class CustomerUtils {
             e.printStackTrace();
         }
 
-        if(recordFile == null) {
+        if (recordFile == null) {
             return isSuccess;
         }
 
@@ -109,7 +109,7 @@ public class CustomerUtils {
         boolean isSuccess = false;
 
         //如果用户不存在, false
-        if(!isCustomerExist(username)) {
+        if (!isCustomerExist(username)) {
             return isSuccess;
         }
 
@@ -128,10 +128,10 @@ public class CustomerUtils {
 
             boolean isFirst = true;
             for (int i = 0; i < recordList.size(); i++) {
-                if(recordList.get(i).getUsername().equals(username)) {
+                if (recordList.get(i).getUsername().equals(username)) {
                     continue;
                 }
-                if(isFirst) {
+                if (isFirst) {
                     FileUtils.writeFixedString(formatCustomer(recordList.get(i)), CustomerUtils.RECORD_SIZE, refreshDataOutputStream);
 
                     release(refreshDataOutputStream, refreshStream);
@@ -164,12 +164,12 @@ public class CustomerUtils {
 
             String record;
             String[] splitRecord;
-            while(recordFile.getFilePointer() != recordFile.length()) {
+            while (recordFile.getFilePointer() != recordFile.length()) {
                 record = FileUtils.readSpecificRecord(CustomerUtils.RECORD_SIZE, recordFile).trim();
                 splitRecord = record.split(CustomerUtils.SEPARATOR);
                 customerList.add(new Customer(splitRecord[0], splitRecord[1], splitRecord[2], Boolean.valueOf(splitRecord[3])));
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -179,7 +179,7 @@ public class CustomerUtils {
 
 
     private static int getLastCustomerNum(RandomAccessFile recordFile) throws IOException {
-        if(recordFile.length() == 0) {
+        if (recordFile.length() == 0) {
             return 0;
         }
 
@@ -221,17 +221,17 @@ public class CustomerUtils {
             e.printStackTrace();
         }
 
-        if(recordFile == null) {
+        if (recordFile == null) {
             return false;
         }
 
         String record;  //存返回的数据
         String[] splitRecord;   //split后的record
         try {
-            while(recordFile.getFilePointer() != recordFile.length()) {
+            while (recordFile.getFilePointer() != recordFile.length()) {
                 record = FileUtils.readSpecificRecord(CustomerUtils.RECORD_SIZE, recordFile);//如果separator为'---'
                 splitRecord = record.split(CustomerUtils.SEPARATOR);                           //则标准格式1---admin---admin---true---[1,2,3]
-                if(splitRecord[1].equals(username)) {
+                if (splitRecord[1].equals(username)) {
                     return true;
                 }
             }
@@ -246,7 +246,7 @@ public class CustomerUtils {
 
     //关闭各种流
     private static void release(DataOutputStream dataOutputStream, OutputStream outputStream) {
-        if(dataOutputStream != null) {
+        if (dataOutputStream != null) {
             try {
                 dataOutputStream.close();
             } catch (IOException e) {
@@ -254,7 +254,7 @@ public class CustomerUtils {
             }
         }
 
-        if(outputStream != null) {
+        if (outputStream != null) {
             try {
                 outputStream.close();
             } catch (IOException e) {

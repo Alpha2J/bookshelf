@@ -2,7 +2,7 @@ package cn.alpha2j.bean;
 
 /**
  * Created by cn.alpha2j on 2016/11/24.
- *
+ * <p>
  * 记录借书者和图书的对应关系
  */
 public class TransactionRecord {
@@ -77,15 +77,15 @@ public class TransactionRecord {
 
     @Override
     public boolean equals(Object o) {
-        if(o == this) {
+        if (o == this) {
             return true;
         }
 
-        if(!(o instanceof TransactionRecord)) {
+        if (!(o instanceof TransactionRecord)) {
             return false;
         }
 
-        TransactionRecord tr = (TransactionRecord)o;
+        TransactionRecord tr = (TransactionRecord) o;
 
         return tr.customerId.equals(customerId)
                 && tr.customerName.equals(customerName)
