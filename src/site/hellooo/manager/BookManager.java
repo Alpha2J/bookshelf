@@ -1,7 +1,7 @@
-package cn.alpha2j.manager;
+package site.hellooo.manager;
 
-import cn.alpha2j.bean.Book;
-import cn.alpha2j.utils.BookUtils;
+import site.hellooo.bean.Book;
+import site.hellooo.utils.BookUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

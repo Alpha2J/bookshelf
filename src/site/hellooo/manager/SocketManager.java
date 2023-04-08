@@ -1,4 +1,4 @@
-package cn.alpha2j.manager;
+package site.hellooo.manager;
 
 import java.io.IOException;
 import java.net.Socket;

@@ -1,6 +1,6 @@
-package cn.alpha2j.utils;
+package site.hellooo.utils;
 
-import cn.alpha2j.bean.Customer;
+import site.hellooo.bean.Customer;
 
 import java.io.*;
 import java.util.ArrayList;

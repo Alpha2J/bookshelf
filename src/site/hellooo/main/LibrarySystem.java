@@ -1,11 +1,11 @@
-package cn.alpha2j.main;
+package site.hellooo.main;
 
-import cn.alpha2j.bean.Customer;
-import cn.alpha2j.manager.BookManager;
-import cn.alpha2j.manager.CustomerManager;
-import cn.alpha2j.manager.SocketManager;
-import cn.alpha2j.manager.TransactionManager;
-import cn.alpha2j.utils.CustomerUtils;
+import site.hellooo.bean.Customer;
+import site.hellooo.manager.BookManager;
+import site.hellooo.manager.CustomerManager;
+import site.hellooo.manager.SocketManager;
+import site.hellooo.manager.TransactionManager;
+import site.hellooo.utils.CustomerUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

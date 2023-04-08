@@ -1,4 +1,4 @@
-package cn.alpha2j.bean;
+package site.hellooo.bean;
 
 /**
  * Created by cn.alpha2j on 2016/11/30.

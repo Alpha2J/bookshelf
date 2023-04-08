@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>site.hellooo</groupId>
-    <artifactId>bookshelf-cli</artifactId>
+    <artifactId>bookshelf</artifactId>
     <version>0.0.1-SHAPSHOT</version>
 
     <properties>

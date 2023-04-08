@@ -1,7 +1,7 @@
-package cn.alpha2j.manager;
+package site.hellooo.manager;
 
-import cn.alpha2j.bean.Customer;
-import cn.alpha2j.utils.CustomerUtils;
+import site.hellooo.bean.Customer;
+import site.hellooo.utils.CustomerUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

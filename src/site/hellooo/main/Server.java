@@ -1,4 +1,4 @@
-package cn.alpha2j.main;
+package site.hellooo.main;
 
 import java.io.IOException;
 import java.net.ServerSocket;
